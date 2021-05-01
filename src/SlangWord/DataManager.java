@@ -51,6 +51,14 @@ public class DataManager {
         }
     }
 
+    public void searchHistory (){
+        for (int i = 0; i < list_search_history.size(); i++){
+            System.out.println((i+1) + ": " + list_search_history.get(i));
+        }
+    }
+    public void saveSearchHistory()throws IOException{
+        data.write_search_history(list_search_history);
+    }
     public void add(){
 
     }
