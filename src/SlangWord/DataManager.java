@@ -34,10 +34,23 @@ public class DataManager {
             }
         }
     }
+    public void searchDefinition() {
+        System.out.println("Enter an slang word:");
+        Scanner scan= new Scanner(System.in);
+        String text= scan.nextLine();
 
-    public void saveSearchHistory()throws IOException{
-        data.write_search_history(list_search_history);
+        List<String> myList2 = new ArrayList<String>();
+        for (String i : word_list_definition.keySet()) {
+            if (i.contains(text))
+            {
+                myList2.add("Definition: " + (i) + "\nSlang: " + word_list_definition.get(i) + "\n");
+            }
+        }
+        for (int i = 0; i < myList2.size(); i++){
+            System.out.println((i+1) + "." + myList2.get(i));
+        }
     }
+
     public void add(){
 
     }
