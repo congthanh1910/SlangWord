@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class DataManager {
+    public static Scanner scanner = new Scanner(System.in);
     HashMap<String, List<String>> word_list_slang;
     HashMap<String, List<String>> word_list_definition;
     List<String> list_search_history;
@@ -16,12 +17,14 @@ public class DataManager {
         list_search_history = data.read_search_history();
     }
 
+    public void saveSlangWord()throws IOException{
+        data.write_slang_word(word_list_slang);
+    }
+
     public void searchSlangWord() {
         System.out.println("Enter an slang word:");
-        Scanner scan= new Scanner(System.in);
-        String text= scan.nextLine();
+        String text= scanner.nextLine();
         list_search_history.add(text);
-
 
         List<String> myList2 = new ArrayList<String>();
         myList2 = word_list_slang.get(text);
@@ -36,8 +39,7 @@ public class DataManager {
     }
     public void searchDefinition() {
         System.out.println("Enter an slang word:");
-        Scanner scan= new Scanner(System.in);
-        String text= scan.nextLine();
+        String text= scanner.nextLine();
 
         List<String> myList2 = new ArrayList<String>();
         for (String i : word_list_definition.keySet()) {
@@ -59,11 +61,54 @@ public class DataManager {
     public void saveSearchHistory()throws IOException{
         data.write_search_history(list_search_history);
     }
-    public void add(){
+    public void add()throws IOException{
+        List<String> listMeaning = new ArrayList<>();
+        System.out.println("Enter an slang word new:");
+        String key = scanner.nextLine();
+        List<String> meaningSlangWordNew = new ArrayList<>();
 
+        while(true){
+            System.out.println("Enter a meaning slang word new:");
+            System.out.println("Enter 'y' if you done");
+            String meaing = scanner.nextLine();
+            if (meaing.equals("y")){
+                break;
+            }
+            meaningSlangWordNew.add(meaing);
+        }
+
+        Boolean isExist = word_list_slang.containsKey(key);
+        String type = null;
+        if (isExist){
+            System.out.println("1. Overwrite");
+            System.out.println("2. Duplicate");
+            System.out.println("Cancel");
+            type = scanner.nextLine();
+        }
+        else{
+            word_list_slang.put(key, meaningSlangWordNew);
+        }
+
+
+        if (type.equals("1")){
+            word_list_slang.put(key, meaningSlangWordNew);
+        }
+        else if (type.equals("2")){
+            List<String> myList2 = new ArrayList<String>();
+            myList2 = word_list_slang.get(key);
+            for (int i = 0; i < meaningSlangWordNew.size(); i++){
+                myList2.add(meaningSlangWordNew.get(i));
+            }
+            word_list_slang.put(key, myList2);
+        }
     }
-    public void edit(){}
+    public void edit(){
+        System.out.println("Enter an slang word want edit:");
+        String key = scanner.nextLine();
+        
+    }
     public void delete(){}
     public void backup(){}
     public void random(){}
+
 }

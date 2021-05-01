@@ -24,6 +24,9 @@ public class Main {
                 case "3":
                     dataManager.searchHistory();
                     break;
+                case "4":
+                    dataManager.add();
+                    break;
                 case "0":
                     System.out.println("exited!");
                     exit = true;
@@ -34,6 +37,7 @@ public class Main {
             }
             if (exit) {
                 dataManager.saveSearchHistory();
+                dataManager.saveSlangWord();
                 break;
             }
         }
@@ -45,6 +49,13 @@ public class Main {
         System.out.println("1. Search Slang Word");
         System.out.println("2. Search Slang Word by definition");
         System.out.println("3. Search history");
+        System.out.println("4. Add new slang word");
+        System.out.println("5. Edit slang word");
+        System.out.println("6. Delete slang word");
+        System.out.println("7. Reset data slang word");
+        System.out.println("8. Random a slang word");
+        System.out.println("9. ");
+        System.out.println("10. ");
         System.out.println("0. exit.");
         System.out.println("---------------------------");
         System.out.print("Please choose: ");

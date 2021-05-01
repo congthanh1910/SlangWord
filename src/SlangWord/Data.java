@@ -5,14 +5,14 @@ import java.util.*;
 
 public class Data {
     private static final String DATA_FILE_NAME_BACKUP = "slang.txt";
-    private static final String DATA_FILE_NAME = "data.txt";
+    //private static final String DATA_FILE_NAME = "data.txt";
+    private static final String DATA_FILE_NAME = "test.txt";
     private static final String DATA_FILE_NAME_SEARCH_HISTORY = "searchHistory.txt";
 
     public HashMap<String, List<String>> read_slang_word()throws IOException{
         HashMap<String, List<String>> slang_word = new HashMap<String, List<String>>();
         BufferedReader br = new BufferedReader(new FileReader(DATA_FILE_NAME));
         String str;
-
         br.readLine();
         while (true)
         {
@@ -38,7 +38,6 @@ public class Data {
         HashMap<String, List<String>> definition = new HashMap<String, List<String>>();
         BufferedReader br = new BufferedReader(new FileReader(DATA_FILE_NAME));
         String str;
-
         br.readLine();
         while (true)
         {
@@ -92,5 +91,23 @@ public class Data {
             bw.newLine();
         }
         bw.close();
+    }
+    public void write_slang_word(HashMap<String, List<String>> list)throws IOException{
+        BufferedWriter bw = new BufferedWriter(new FileWriter(DATA_FILE_NAME));
+        bw.write("Slag`Meaning");
+        bw.newLine();
+        for (String key: list.keySet()){
+            bw.write(key);
+            bw.write("`");
+            for (int i = 0; i < list.get(key).size(); i++){
+                bw.write(list.get(key).get(i));
+                if (i != list.get(key).size() - 1){
+                    bw.write("|");
+                }
+            }
+            bw.newLine();
+        }
+        bw.close();
+
     }
 }
