@@ -27,6 +27,9 @@ public class Main {
                 case "4":
                     dataManager.add();
                     break;
+                case "5":
+                    dataManager.edit();
+                    break;
                 case "0":
                     System.out.println("exited!");
                     exit = true;

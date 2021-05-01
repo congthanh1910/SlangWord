@@ -68,8 +68,7 @@ public class DataManager {
         List<String> meaningSlangWordNew = new ArrayList<>();
 
         while(true){
-            System.out.println("Enter a meaning slang word new:");
-            System.out.println("Enter 'y' if you done");
+            System.out.println("Enter a meaning slang word new: 'y' if you done");
             String meaing = scanner.nextLine();
             if (meaing.equals("y")){
                 break;
@@ -105,7 +104,24 @@ public class DataManager {
     public void edit(){
         System.out.println("Enter an slang word want edit:");
         String key = scanner.nextLine();
-        
+
+        Boolean isExist = word_list_slang.containsKey(key);
+        if (!isExist){
+            System.out.println("Slang word does not exist");
+            return;
+        }
+
+        List<String> meaingNewList = new ArrayList<>();
+        while(true){
+            System.out.println("Enter a meaning slang word new: 'y' if you done");
+            String meaing = scanner.nextLine();
+            if (meaing.equals("y")){
+                break;
+            }
+            meaingNewList.add(meaing);
+        }
+        word_list_slang.put(key, meaingNewList);
+        System.out.println("Slang word " + key + " update successfully");
     }
     public void delete(){}
     public void backup(){}
