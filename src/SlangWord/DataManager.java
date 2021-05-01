@@ -139,6 +139,15 @@ public class DataManager {
         word_list_slang = data.back_up_data();
         System.out.println("Reset data successfully");
     }
-    
+    public void random(){
+        Object[] crunchifyKeys = word_list_slang.keySet().toArray();
+        Object key = crunchifyKeys[new Random().nextInt(crunchifyKeys.length)];
+        System.out.println("*** Random slang word *** \n");
+        System.out.println("Slang word: " + key);
+        System.out.println("Meaning: ");
+        for (int i = 0; i < word_list_slang.get(key).size(); i++){
+            System.out.println((i+1) + ". " + word_list_slang.get(key).get(i));
+        }
+    }
 
 }
