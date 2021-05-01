@@ -110,5 +110,28 @@ public class Data {
         bw.close();
 
     }
-    
+    public HashMap<String, List<String>> back_up_data()throws IOException{
+        HashMap<String, List<String>> slang_word_backup = new HashMap<String, List<String>>();
+        BufferedReader br = new BufferedReader(new FileReader(DATA_FILE_NAME_BACKUP));
+        String str;
+        br.readLine();
+        while (true)
+        {
+            str = br.readLine();
+            if (str==null)
+                break;
+
+            String[] parts = str.split("`");
+            String[] meaning = parts[1].split("[|]");
+
+            List<String> myList = new ArrayList<String>();
+            for (int i = 0; i < meaning.length; i++) {
+                myList.add(meaning[i].trim());
+            }
+            slang_word_backup.put(parts[0], myList);
+
+        }
+        br.close();
+        return slang_word_backup;
+    }
 }

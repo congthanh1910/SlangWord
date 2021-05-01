@@ -135,6 +135,10 @@ public class DataManager {
         word_list_slang.remove(key);
         System.out.println("Slang word " + key + " delete successfully");
     }
-
+    public void backup()throws IOException{
+        word_list_slang = data.back_up_data();
+        System.out.println("Reset data successfully");
+    }
+    
 
 }
