@@ -123,8 +123,18 @@ public class DataManager {
         word_list_slang.put(key, meaingNewList);
         System.out.println("Slang word " + key + " update successfully");
     }
-    public void delete(){}
-    public void backup(){}
-    public void random(){}
+    public void delete(){
+        System.out.println("Enter an slang word want delete:");
+        String key = scanner.nextLine();
+
+        Boolean isExist = word_list_slang.containsKey(key);
+        if (!isExist){
+            System.out.println("Slang word does not exist");
+            return;
+        }
+        word_list_slang.remove(key);
+        System.out.println("Slang word " + key + " delete successfully");
+    }
+
 
 }

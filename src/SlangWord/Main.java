@@ -30,6 +30,15 @@ public class Main {
                 case "5":
                     dataManager.edit();
                     break;
+                case "6":
+                    dataManager.delete();
+                    break;
+                case "7":
+                    dataManager.backup();
+                    break;
+                case "8":
+                    dataManager.random();
+                    break;
                 case "0":
                     System.out.println("exited!");
                     exit = true;

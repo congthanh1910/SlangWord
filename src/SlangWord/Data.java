@@ -4,7 +4,8 @@ import java.io.*;
 import java.util.*;
 
 public class Data {
-    private static final String DATA_FILE_NAME_BACKUP = "slang.txt";
+    //private static final String DATA_FILE_NAME_BACKUP = "slang.txt";
+    private static final String DATA_FILE_NAME_BACKUP = "test_backup.txt";
     //private static final String DATA_FILE_NAME = "data.txt";
     private static final String DATA_FILE_NAME = "test.txt";
     private static final String DATA_FILE_NAME_SEARCH_HISTORY = "searchHistory.txt";
@@ -33,7 +34,6 @@ public class Data {
         br.close();
         return slang_word;
     }
-
     public HashMap<String, List<String>> read_definition()throws IOException{
         HashMap<String, List<String>> definition = new HashMap<String, List<String>>();
         BufferedReader br = new BufferedReader(new FileReader(DATA_FILE_NAME));
@@ -110,4 +110,5 @@ public class Data {
         bw.close();
 
     }
+    
 }
