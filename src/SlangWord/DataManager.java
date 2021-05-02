@@ -61,7 +61,7 @@ public class DataManager {
     public void saveSearchHistory()throws IOException{
         data.write_search_history(list_search_history);
     }
-    public void add()throws IOException{
+    public void add()throws IOException, NullPointerException{
         List<String> listMeaning = new ArrayList<>();
         System.out.println("Enter an slang word new:");
         String key = scanner.nextLine();
@@ -69,11 +69,11 @@ public class DataManager {
 
         while(true){
             System.out.println("Enter a meaning slang word new: 'y' if you done");
-            String meaing = scanner.nextLine();
-            if (meaing.equals("y")){
+            String done = scanner.nextLine();
+            if (done.equals("y")){
                 break;
             }
-            meaningSlangWordNew.add(meaing);
+            meaningSlangWordNew.add(done);
         }
 
         Boolean isExist = word_list_slang.containsKey(key);
@@ -81,13 +81,16 @@ public class DataManager {
         if (isExist){
             System.out.println("1. Overwrite");
             System.out.println("2. Duplicate");
-            System.out.println("Cancel");
             type = scanner.nextLine();
         }
         else{
             word_list_slang.put(key, meaningSlangWordNew);
+            System.out.println("Add new slang word successfully");
         }
 
+        if(type == null){
+            return;
+        }
 
         if (type.equals("1")){
             word_list_slang.put(key, meaningSlangWordNew);
@@ -100,6 +103,7 @@ public class DataManager {
             }
             word_list_slang.put(key, myList2);
         }
+        System.out.println("Add new slang word successfully");
     }
     public void edit(){
         System.out.println("Enter an slang word want edit:");
