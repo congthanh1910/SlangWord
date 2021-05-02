@@ -150,4 +150,61 @@ public class DataManager {
         }
     }
 
+    public void quizSlang(){
+        Object[] keySlang = word_list_slang.keySet().toArray();
+        Object key = keySlang[new Random().nextInt(keySlang.length)];
+
+        Object[] keyDefinition = word_list_definition.keySet().toArray();
+        Object answer1 = keyDefinition[new Random().nextInt(keyDefinition.length)];
+        Object answer2 = keyDefinition[new Random().nextInt(keyDefinition.length)];
+        Object answer3 = keyDefinition[new Random().nextInt(keyDefinition.length)];
+        System.out.println("*** Quiz show *** \n");
+        System.out.println("Meaning of : " + key);
+
+
+        Random generator = new Random();
+        int value = generator.nextInt(word_list_slang.get(key).size());
+        List<String> listAnswer = new ArrayList<>();
+        listAnswer.add(word_list_slang.get(key).get(value));
+        listAnswer.add(answer1.toString());
+        listAnswer.add(answer2.toString());
+        listAnswer.add(answer3.toString());
+        Collections.shuffle(listAnswer);
+
+
+        for (int i = 1; i <= 4; i++){
+            System.out.println("Answer "+ i +": " + listAnswer.get(i-1));
+        }
+        System.out.println("Your answer : ");
+        String answerUser = scanner.nextLine();
+        String[] answerValid = {"1", "2", "3", "4"};
+        boolean AnswerUserValid = false;
+        for (String i: answerValid){
+            if(answerUser.equals(i)){
+                AnswerUserValid = true;
+            }
+        }
+        if(AnswerUserValid == false){
+            System.out.println("Answer invalid!!");
+            return;
+        }
+        boolean checkUserAnswer = checkAnswer(key.toString(), listAnswer.get(Integer.parseInt(answerUser)-1));
+        if(checkUserAnswer){
+            System.out.println("Congratulations, correct answer.");
+        }
+        else{
+            System.out.println("Sorry, the answer is wrong.");
+        }
+    }
+    public boolean checkAnswer(String key, String answer){
+        List<String> listDefinition= new ArrayList<>();
+        listDefinition = word_list_slang.get(key);
+        for (String i: listDefinition){
+            if (answer.equals(i)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public void quizDefinition(){}
 }

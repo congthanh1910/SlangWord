@@ -39,6 +39,12 @@ public class Main {
                 case "8":
                     dataManager.random();
                     break;
+                case "9":
+                    dataManager.quizSlang();
+                    break;
+                case "10":
+                    dataManager.quizDefinition();
+                    break;
                 case "0":
                     System.out.println("exited!");
                     exit = true;
@@ -66,8 +72,8 @@ public class Main {
         System.out.println("6. Delete slang word");
         System.out.println("7. Reset data slang word");
         System.out.println("8. Random a slang word");
-        System.out.println("9. ");
-        System.out.println("10. ");
+        System.out.println("9. Quiz show slang");
+        System.out.println("10. Quiz show definition");
         System.out.println("0. exit.");
         System.out.println("---------------------------");
         System.out.print("Please choose: ");
