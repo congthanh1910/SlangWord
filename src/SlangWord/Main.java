@@ -9,11 +9,15 @@ public class Main {
     public static void main(String[] args) throws IOException {
         DataManager dataManager = new DataManager();
         String choose = null;
+        String continueProgram = null;
         boolean exit = false;
+        boolean commandValid = false;
+        String[] orderValid = {"y", "n"};
 
         while (true) {
             showMenu();
             choose = scanner.nextLine();
+
             switch (choose) {
                 case "1":
                     dataManager.searchSlangWord();

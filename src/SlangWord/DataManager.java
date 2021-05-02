@@ -38,7 +38,7 @@ public class DataManager {
         }
     }
     public void searchDefinition() {
-        System.out.println("Enter an slang word:");
+        System.out.println("Enter an definition: ");
         String text= scanner.nextLine();
 
         List<String> myList2 = new ArrayList<String>();
@@ -161,7 +161,6 @@ public class DataManager {
         System.out.println("*** Quiz show *** \n");
         System.out.println("Meaning of : " + key);
 
-
         Random generator = new Random();
         int value = generator.nextInt(word_list_slang.get(key).size());
         List<String> listAnswer = new ArrayList<>();
@@ -171,24 +170,32 @@ public class DataManager {
         listAnswer.add(answer3.toString());
         Collections.shuffle(listAnswer);
 
-
         for (int i = 1; i <= 4; i++){
             System.out.println("Answer "+ i +": " + listAnswer.get(i-1));
         }
+
         System.out.println("Your answer : ");
-        String answerUser = scanner.nextLine();
-        String[] answerValid = {"1", "2", "3", "4"};
         boolean AnswerUserValid = false;
-        for (String i: answerValid){
-            if(answerUser.equals(i)){
-                AnswerUserValid = true;
+        String[] answerValid = {"1", "2", "3", "4"};
+        boolean checkUserAnswer = false;
+
+        while(AnswerUserValid == false){
+            String answerUser = scanner.nextLine();
+            for (String i: answerValid){
+                if(answerUser.equals(i)){
+                    AnswerUserValid = true;
+                }
+            }
+            if(AnswerUserValid == false){
+                System.out.println("Answer invalid!!");
+                System.out.println("Please enter the correct value.");
+            }
+            else{
+                checkUserAnswer = checkAnswer(key.toString(), listAnswer.get(Integer.parseInt(answerUser)-1), "slang");
+                break;
             }
         }
-        if(AnswerUserValid == false){
-            System.out.println("Answer invalid!!");
-            return;
-        }
-        boolean checkUserAnswer = checkAnswer(key.toString(), listAnswer.get(Integer.parseInt(answerUser)-1));
+
         if(checkUserAnswer){
             System.out.println("Congratulations, correct answer.");
         }
@@ -196,9 +203,69 @@ public class DataManager {
             System.out.println("Sorry, the answer is wrong.");
         }
     }
-    public boolean checkAnswer(String key, String answer){
+    public void quizDefinition(){
+        Object[] keyDefinition = word_list_definition.keySet().toArray();
+        Object key = keyDefinition[new Random().nextInt(keyDefinition.length)];
+
+        Object[] keySlang = word_list_slang.keySet().toArray();
+        Object answer1 = keySlang[new Random().nextInt(keySlang.length)];
+        Object answer2 = keySlang[new Random().nextInt(keySlang.length)];
+        Object answer3 = keySlang[new Random().nextInt(keySlang.length)];
+
+        System.out.println("*** Quiz show *** \n");
+        System.out.println("Slang of word : " + key);
+
+        Random generator = new Random();
+        int value = generator.nextInt(word_list_definition.get(key).size());
+        List<String> listAnswer = new ArrayList<>();
+        listAnswer.add(word_list_definition.get(key).get(value));
+        listAnswer.add(answer1.toString());
+        listAnswer.add(answer2.toString());
+        listAnswer.add(answer3.toString());
+        Collections.shuffle(listAnswer);
+
+        for (int i = 1; i <= 4; i++){
+            System.out.println("Answer "+ i +": " + listAnswer.get(i-1));
+        }
+        System.out.println("Your answer : ");
+        boolean AnswerUserValid = false;
+        String[] answerValid = {"1", "2", "3", "4"};
+        boolean checkUserAnswer = false;
+
+        while(AnswerUserValid == false){
+            String answerUser = scanner.nextLine();
+            for (String i: answerValid){
+                if(answerUser.equals(i)){
+                    AnswerUserValid = true;
+                }
+            }
+            if(AnswerUserValid == false){
+                System.out.println("Answer invalid!!");
+                System.out.println("Please enter the correct value.");
+            }
+            else{
+                checkUserAnswer = checkAnswer(key.toString(), listAnswer.get(Integer.parseInt(answerUser)-1), "definition");
+                break;
+            }
+        }
+
+        if(checkUserAnswer){
+            System.out.println("Congratulations, correct answer.");
+        }
+        else{
+            System.out.println("Sorry, the answer is wrong.");
+        }
+    }
+    public boolean checkAnswer(String key, String answer, String type){
         List<String> listDefinition= new ArrayList<>();
-        listDefinition = word_list_slang.get(key);
+        if (type.equals("slang")){
+            listDefinition = word_list_slang.get(key);
+        }
+
+        if (type.equals("definition")){
+            listDefinition = word_list_definition.get(key);
+        }
+
         for (String i: listDefinition){
             if (answer.equals(i)){
                 return true;
@@ -206,5 +273,16 @@ public class DataManager {
         }
         return false;
     }
-    public void quizDefinition(){}
+    public int continueProgram(String order){
+        String[] orderValid = {"y", "n"};
+        for (String i: orderValid){
+            if (!order.equals(i)){
+                return -1;
+            }
+        }
+        if (order.equals("y")){
+            return 1;
+        }
+        return 0;
+    }
 }
